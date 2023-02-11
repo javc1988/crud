@@ -1,17 +1,25 @@
-<form class="form-signin">
-    <div class="text-center mb-4">
-      <h1 class="h3 mb-3 font-weight-normal">Iniciar sesión</h1>
+<div class="container">
+      <form [formGroup]="loginForm">
+        <div class="login-container">
+          <div class="row">
+            <div class="col-md-12">
+              <div class="form-group">
+                <label>Email</label>
+                <input type="email" name="email" formControlName="email" required class="form-control">               
+              </div>
+            </div>
+            <div class="col-md-12">
+              <div class="form-group">
+                <label>Password</label>
+                <input type="password" name="pass" formControlName="password" required class="form-control">               
+              </div>
+            </div>
+            <div class="col-md-12">
+              <div class="form-group">
+                <button (click)="onLogin()" class="btn btn-success pull-right">Login</button>
+              </div>
+            </div>
+          </div>          
+        </div>
+      </form>
     </div>
-  
-    <div class="form-label-group">
-      <input type="text" id="inputEmail" class="form-control" placeholder="Nombre de usuario" [(ngModel)]="username" [ngModelOptions]="{standalone: true}" required autofocus>
-      <label for="inputEmail">Nombre de usuario</label>
-    </div>
-  
-    <div class="form-label-group">
-      <input type="password" id="inputPassword" class="form-control" placeholder="Contraseña" [(ngModel)]="password" [ngModelOptions]="{standalone: true}" required>
-      <label for="inputPassword">Contraseña</label>
-    </div>
-  
-    <button class="btn btn-lg btn-primary btn-block" type="submit" (click)="login()">Iniciar sesión</button>
-  </form>

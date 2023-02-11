@@ -1,4 +1,7 @@
 import { Component } from '@angular/core';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { Router } from '@angular/router';
+import { LoginService } from 'src/app/core/services/login.service';
 
 @Component({
   selector: 'app-login',
@@ -8,11 +11,39 @@ import { Component } from '@angular/core';
 export class LoginComponent {
   username = '';
   password = '';
+  loginForm: FormGroup | any;
 
-  login() {
-    console.log('Iniciando sesión con', this.username, this.password);
-    // Aquí deberías hacer una llamada a un servicio que verifique las credenciales y
-    // realice la autenticación.
+  constructor(
+    private fb: FormBuilder,
+    private router: Router,
+    private loginService: LoginService
+  ) {
+    this.initLoginForm();
+  }
+
+  initLoginForm() {
+    this.loginForm = this.fb.group({
+      email: ['', [Validators.required]],
+      password: ['', [Validators.required]]
+    })
+  }
+
+  onLogin() {
+    if (this.loginForm.valid) {
+      const dataForm = this.loginForm.getRawValue();
+
+      
+
+      this.loginService.login(dataForm)
+      .subscribe((resp: any) => {
+        
+      });
+
+      //this.router.navigateByUrl('/admin');
+    }
+    else{
+      alert('2')
+    }
   }
 
 }
